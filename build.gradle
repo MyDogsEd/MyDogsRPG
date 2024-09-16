@@ -43,6 +43,7 @@ tasks.register('copyJar', Copy) {
 
 // Task that builds and then runs the bot jar file
 tasks.register("buildAndRunJar", JavaExec){
+    dependsOn 'shadowJar'
     dependsOn 'copyJar'
     classpath = files("execution/MyDogsRPG.jar")
 }

@@ -2,7 +2,7 @@ plugins {
     id "com.gradleup.shadow" version "8.3.1"
     id 'java'
 }
-git
+
 group = 'dev.mydogsed'
 version = '1.0-SNAPSHOT'
 
@@ -39,7 +39,3 @@ tasks.register('copyJar', Copy) {
     into "execution"
 }
 
-// Define the build task
-tasks.register('buildJar', shadowJar) {
-
-}

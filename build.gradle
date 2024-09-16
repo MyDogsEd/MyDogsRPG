@@ -6,7 +6,6 @@ plugins {
 group = 'dev.mydogsed'
 version = '1.0-SNAPSHOT'
 
-
 repositories {
     mavenCentral()
 }
@@ -29,8 +28,11 @@ jar {
     }
 }
 
+// Set the file name
+// Copy the file to the execution directory
 shadowJar {
     archiveFileName.set('MyDogsRPG.jar')
+    finalizedBy("copyJar")
 }
 
 // Copy the .JAR file from the libs directory to the execution directory (Creating it if not present)
@@ -39,3 +41,8 @@ tasks.register('copyJar', Copy) {
     into "execution"
 }
 
+// Task that builds and then runs the bot jar file
+tasks.register("buildAndRunJar", JavaExec){
+    dependsOn 'copyJar'
+    classpath = files("execution/MyDogsRPG.jar")
+}

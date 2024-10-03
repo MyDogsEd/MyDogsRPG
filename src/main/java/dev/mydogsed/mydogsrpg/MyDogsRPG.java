@@ -10,11 +10,13 @@ import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.exceptions.InvalidTokenException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class MyDogsRPG extends ListenerAdapter {
@@ -34,20 +36,18 @@ public class MyDogsRPG extends ListenerAdapter {
         } catch (FileNotFoundException e) {
             logger.error("API Key file not found.");
             logger.error("You must create the BOT_KEY.apikey file in the same directory as the .jar file.");
-            return;
+            logger.error("(Checking in {} for key file)", Paths.get("").toAbsolutePath());
         } catch (InvalidTokenException e) {
             logger.error("The provided token is invalid.");
-            return;
         } catch (IllegalArgumentException e){
             logger.error("One of the provided arguments is invalid.");
-            return;
         }
         // From this point on, all code will be handled via events.
     }
 
     // Register all commands and things after the bot is logged in
     @Override
-    public void onReady(ReadyEvent event) {
+    public void onReady(@NotNull ReadyEvent event) {
         registerSlashCommands();
         registerCommandExecutors();
         registerListeners();

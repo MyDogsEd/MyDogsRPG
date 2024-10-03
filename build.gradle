@@ -45,5 +45,6 @@ tasks.register('copyJar', Copy) {
 tasks.register("buildAndRunJar", JavaExec){
     dependsOn 'shadowJar'
     dependsOn 'copyJar'
+    workingDir = file("execution")
     classpath = files("execution/MyDogsRPG.jar")
 }
